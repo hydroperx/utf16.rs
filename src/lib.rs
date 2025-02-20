@@ -1,4 +1,7 @@
 pub mod slice;
+pub mod utils;
+mod iterators;
+pub use iterators::*;
 
 mod utf16str;
 mod utf16string;
@@ -8,12 +11,12 @@ mod utf16string;
 #[repr(transparent)]
 pub struct Utf16Str {
     /// UTF-16 code units.
-    raw: [u16],
+    pub(crate) raw: [u16],
 }
 
 /// An owned UTF-16 string consisting of UCS-2 code units.
 #[derive(Debug, Eq, PartialEq, Hash)]
 pub struct Utf16String {
     /// UTF-16 code units.
-    buf: Vec<u16>,
+    pub(crate) buf: Vec<u16>,
 }

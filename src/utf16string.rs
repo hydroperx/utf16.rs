@@ -1,4 +1,4 @@
-use super::{Utf16Str, Utf16String};
+use crate::{Utf16Str, Utf16String};
 use std::ops::{Deref, DerefMut};
 
 impl Deref for Utf16String {
