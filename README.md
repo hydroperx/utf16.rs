@@ -25,7 +25,9 @@ assert_eq!(two_utf8_offsets_as_utf16_offsets(&utf16string, utf8string, 5, 6), (3
 
 The above is inefficient for large strings. If you have line slices, do something like the following to convert from UTF-16 to UTF-8:
 
-```
+```rust
+use realhydroper_utf16::{Utf16String, utils::*};
+
 fn range_to_utf8_span(src: &Source, range: Utf8Range) -> Utf8Span {
     let start_line_offset = src.get_line_offset((range.start.line as usize) + 1).unwrap();
     let end_line_offset = src.get_line_offset((range.end.line as usize) + 1).unwrap();
