@@ -1,11 +1,11 @@
 [package]
-name = "realhydroper-utf16string"
+name = "realhydroper-utf16"
 version = "1.1.0"
 authors = ["Hydroper <HydroperFox@gmail.com>"]
-description = "String types to work directly with UTF-16 encoded strings"
+description = "Work with UTF-16 in Rust"
 keywords = ["utf16", "string"]
 categories = ["encoding", "text-processing"]
-repository = "https://github.com/realhydroper/rustutf16string"
+repository = "https://github.com/realhydroper/rustutf16"
 edition = "2024"
 license = "Apache-2.0"
 
