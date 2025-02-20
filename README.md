@@ -74,7 +74,9 @@ fn utf8_loc_to_utf16_range(loc: &Utf8Location) -> Utf16Range {
     let start_line_utf16 = Utf16String::from(start_line_utf8);
     let end_line_utf16 = Utf16String::from(end_line_utf8);
 
+    // Start offset from start line
     let start_offset = utf8_offset_as_utf16_offset(&start_line_utf16, &start_line_utf8, loc.first_offset() - start_line_offset);
+    // End offset from end line
     let end_offset = utf8_offset_as_utf16_offset(&end_line_utf16, &end_line_utf8, loc.last_offset() - end_line_offset);
 
     Utf16Range {
