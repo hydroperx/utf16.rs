@@ -47,3 +47,41 @@ fn utf16_range_to_utf8_offsets(src: &SourceText, range: Range) -> (usize, usize)
     (start_line_offset + first_offset, end_line_offset + last_offset)
 }
 ```
+
+Do something like the following to convert from UTF-8 to UTF-16:
+
+```rust
+use realhydroper_utf16::{Utf16String, utils::*};
+
+fn utf8_loc_to_utf16_range(loc: &Utf8Location) -> Utf16Range {
+    let src = loc.source();
+    let first_line = loc.first_line_number();
+    let last_line = loc.first_line_number();
+
+    let start_line_offset = src.get_line_offset(first_line).unwrap();
+    let end_line_offset: usize = src.get_line_offset(last_line).unwrap();
+
+    let start_line_offset_next = src.get_line_offset(first_line + 1).unwrap_or(src.text().len());
+    let end_line_offset_next = src.get_line_offset(last_line + 1).unwrap_or(src.text().len());
+
+    let start_line_utf8 = &src.text()[start_line_offset..start_line_offset_next];
+    let end_line_utf8 = &src.text()[end_line_offset..end_line_offset_next];
+
+    let start_line_utf16 = Utf16String::from(start_line_utf8);
+    let end_line_utf16 = Utf16String::from(end_line_utf8);
+
+    let start_offset = utf8_offset_as_utf16_offset(&start_line_utf16, &start_line_utf8, loc.first_offset() - start_line_offset);
+    let end_offset = utf8_offset_as_utf16_offset(&end_line_utf16, &end_line_utf8, loc.last_offset() - end_line_offset);
+
+    Utf16Range {
+        start: Position {
+            line: (first_line - 1) as u32,
+            character: start_offset as u32,
+        },
+        end: Position {
+            line: (last_line - 1) as u32,
+            character: end_offset as u32,
+        },
+    }
+}
+```
