@@ -25,6 +25,8 @@ assert_eq!(two_utf8_offsets_as_utf16_offsets(&utf16string, utf8string, 5, 6), (3
 
 The above is inefficient for large strings. If you have line slices, do something like the following to convert from UTF-16 to UTF-8:
 
+> Note: adjust the line numbers correctly depending on whether they are "zero" based or "one" based.
+
 ```rust
 use realhydroper_utf16::{Utf16String, utils::*};
 
@@ -49,6 +51,8 @@ fn utf16_range_to_utf8_offsets(src: &Utf8SourceText, range: Utf16Range) -> (usiz
 ```
 
 Do something like the following to convert from UTF-8 to UTF-16:
+
+> Note: adjust the line numbers correctly depending on whether they are "zero" based or "one" based.
 
 ```rust
 use realhydroper_utf16::{Utf16String, utils::*};
