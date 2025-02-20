@@ -1,6 +1,6 @@
 [package]
 name = "realhydroper-utf16string"
-version = "1.0.0"
+version = "1.1.0"
 authors = ["Hydroper <HydroperFox@gmail.com>"]
 description = "String types to work directly with UTF-16 encoded strings"
 keywords = ["utf16", "string"]
