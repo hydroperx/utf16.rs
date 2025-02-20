@@ -28,7 +28,7 @@ The above is inefficient for large strings. If you have line slices, do somethin
 ```rust
 use realhydroper_utf16::{Utf16String, utils::*};
 
-fn range_to_utf8_span(src: &Source, range: Utf8Range) -> Utf8Span {
+fn range_to_utf8_span(src: &Source, range: Utf16Range) -> Utf8Span {
     let start_line_offset = src.get_line_offset((range.start.line as usize) + 1).unwrap();
     let end_line_offset = src.get_line_offset((range.end.line as usize) + 1).unwrap();
 
