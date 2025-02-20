@@ -32,8 +32,8 @@ fn utf16_range_to_utf8_offsets(src: &SourceText, range: Range) -> (usize, usize)
     let start_line_offset = src.get_line_offset((range.start.line as usize) + 1).unwrap();
     let end_line_offset = src.get_line_offset((range.end.line as usize) + 1).unwrap();
 
-    let start_line_offset_next = src.get_line_offset((range.start.line as usize) + 2).unwrap_or(cu.text().len());
-    let end_line_offset_next = src.get_line_offset((range.end.line as usize) + 2).unwrap_or(cu.text().len());
+    let start_line_offset_next = src.get_line_offset((range.start.line as usize) + 2).unwrap_or(src.contents.len());
+    let end_line_offset_next = src.get_line_offset((range.end.line as usize) + 2).unwrap_or(src.contents.len());
 
     let start_line_utf8 = &src.contents[start_line_offset..start_line_offset_next];
     let end_line_utf8 = &src.contents[end_line_offset..end_line_offset_next];
