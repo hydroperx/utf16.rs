@@ -111,4 +111,32 @@ impl Utf16String {
         self.buf.remove(index);
         unsafe { char::from_u32_unchecked(cu1 as u32) }
     }
+
+    /// Removes the last surrogate pair or code unit, and returns the code point that was
+    /// removed.
+    pub fn pop(&mut self) -> Option<char> {
+        let l = self.len();
+        if l == 0 {
+            return None;
+        }
+        let i = l - 1;
+        let cu2 = self.buf[i];
+        if is_low_surrogate(cu2) && l > 1 {
+            let cu1 = self.buf[i - 1];
+            if is_high_surrogate(cu1) {
+                let i2 = i - 1;
+                self.buf.remove(i2);
+                self.buf.remove(i2);
+                return Some(decode_char(cu1, cu2));
+            }
+        }
+        self.buf.remove(i);
+        Some(unsafe { char::from_u32_unchecked(cu2 as u32) })
+    }
+}
+
+impl Default for Utf16String {
+    fn default() -> Self {
+        Utf16String::new()
+    }
 }

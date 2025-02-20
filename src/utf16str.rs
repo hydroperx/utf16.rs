@@ -84,6 +84,14 @@ impl Utf16Str {
         }
         r
     }
+
+    pub fn to_lowercase(&self) -> Utf16String {
+        self.to_utf8().to_lowercase().into()
+    }
+
+    pub fn to_uppercase(&self) -> Utf16String {
+        self.to_utf8().to_uppercase().into()
+    }
 }
 
 impl std::ops::Index<usize> for Utf16Str {

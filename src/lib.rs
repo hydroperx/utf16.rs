@@ -26,3 +26,39 @@ pub struct Utf16String {
     /// UTF-16 code units.
     pub(crate) buf: Vec<u16>,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::Utf16String;
+
+    #[test]
+    fn test_iter() {
+        let string = Utf16String::from("a\u{10000}");
+        let mut chars = string.chars();
+        assert_eq!(chars.next().unwrap(), 'a');
+        assert_eq!(chars.next().unwrap(), '\u{10000}');
+
+        let string = Utf16String::from("\u{10000}\u{10FFFF}");
+        let mut chars = string.chars();
+        assert_eq!(chars.next().unwrap(), '\u{10000}');
+        assert_eq!(chars.next().unwrap(), '\u{10FFFF}');
+    }
+
+    #[test]
+    fn test_length() {
+        let mut string1 = Utf16String::from("a\u{10000}");
+        assert_eq!(string1.len(), 3);
+        string1.pop();
+        assert_eq!(string1.len(), 1);
+    }
+
+    #[test]
+    fn test_slicing() {
+        let string1 = Utf16String::from("a\u{10000}");
+        assert_eq!(string1[1..3].len(), 2);
+        assert_eq!(string1[0..1].len(), 1);
+        assert_eq!(string1[0..].len(), 3);
+        assert_eq!(string1[1..].len(), 2);
+        assert_eq!(string1[..1].len(), 1);
+    }
+}

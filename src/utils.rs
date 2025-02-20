@@ -13,9 +13,9 @@ pub fn encode_char(ch: char) -> Vec<u16> {
 
 /// Decodes a high surrogate and low surrogate into a code point.
 pub fn decode_char(hi: u16, low: u16) -> char {
-    let hi = (hi - 0xD800) * 0x400;
-    let low = low - 0xDC00;
-    char::from_u32((hi + low) as u32 + 0x10000).unwrap_or('\x00')
+    let hi = ((hi - 0xD800) as u32) * 0x400;
+    let low = (low - 0xDC00) as u32;
+    char::from_u32(hi + low + 0x10000).unwrap_or('\x00')
 }
 
 /// Determines whether an UTF-16 code unit is a high surrogate.

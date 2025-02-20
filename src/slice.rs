@@ -294,7 +294,7 @@ where
 
 impl<I> Index<I> for Utf16String
 where
-    I: SliceIndex<Utf16String>
+    I: SliceIndex<Utf16Str>
 {
     type Output = I::Output;
 
@@ -306,7 +306,7 @@ where
 
 impl<I> IndexMut<I> for Utf16String
 where
-    I: SliceIndex<Utf16String>
+    I: SliceIndex<Utf16Str>
 {
     #[inline]
     fn index_mut(&mut self, index: I) -> &mut I::Output {
