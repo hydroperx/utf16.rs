@@ -1,6 +1,7 @@
 use super::{Utf16Str, Utf16String};
 
 impl Utf16Str {
+    /// Returns the number of UTF-16 code units representing the string.
     pub fn len(&self) -> usize {
         self.raw.len()
     }
