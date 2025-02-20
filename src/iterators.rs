@@ -12,7 +12,7 @@ impl<'a> Iterator for Utf16Chars<'a> {
         if self.index < self.slice.raw.len() {
             let i = self.index;
             let cu1 = self.slice.raw[i];
-            if is_high_surrogate(cu1) {
+            if is_high_surrogate(cu1) && (i + 1) < self.slice.raw.len() {
                 let cu2 = self.slice.raw[i + 1];
                 if is_low_surrogate(cu2) {
                     self.index += 2;
@@ -39,7 +39,7 @@ impl<'a> Iterator for Utf16CharIndices<'a> {
         if self.index < self.slice.raw.len() {
             let i = self.index;
             let cu1 = self.slice.raw[i];
-            if is_high_surrogate(cu1) {
+            if is_high_surrogate(cu1) && (i + 1) < self.slice.raw.len() {
                 let cu2 = self.slice.raw[i + 1];
                 if is_low_surrogate(cu2) {
                     self.index += 2;

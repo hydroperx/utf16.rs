@@ -1,4 +1,4 @@
-use crate::{Utf16Chars, Utf16CharIndices, Utf16Str, Utf16String};
+use crate::{slice::SliceIndex, Utf16CharIndices, Utf16Chars, Utf16Str, Utf16String};
 
 impl Utf16Str {
     /// Returns the number of UTF-16 code units representing the string.
@@ -47,6 +47,26 @@ impl Utf16Str {
     }
 
     #[inline]
+    pub fn get<I: SliceIndex<Utf16Str>>(&self, index: I) -> Option<&<I as SliceIndex<Utf16Str>>::Output> {
+        index.get(self)
+    }
+
+    #[inline]
+    pub fn get_mut<I: SliceIndex<Utf16Str>>(&mut self, index: I) -> Option<&mut <I as SliceIndex<Utf16Str>>::Output> {
+        index.get_mut(self)
+    }
+
+    #[inline]
+    pub unsafe fn get_unchecked<I: SliceIndex<Utf16Str>>(&self, index: I) -> &<I as SliceIndex<Utf16Str>>::Output {
+        unsafe { index.get_unchecked(self) }
+    }
+
+    #[inline]
+    pub unsafe fn get_unchecked_mut<I: SliceIndex<Utf16Str>>(&mut self, index: I) -> &mut <I as SliceIndex<Utf16Str>>::Output {
+        unsafe { index.get_unchecked_mut(self) }
+    }
+
+    #[inline]
     pub fn is_empty(&self) -> bool {
         self.raw.len() == 0
     }
@@ -55,6 +75,14 @@ impl Utf16Str {
         Utf16String {
             buf: self.raw.to_owned(),
         }
+    }
+
+    pub fn to_utf8(&self) -> String {
+        let mut r = String::new();
+        for ch in self.chars() {
+            r.push(ch);
+        }
+        r
     }
 }
 
