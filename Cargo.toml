@@ -1,0 +1,15 @@
+[package]
+name = "realhydroper-utf16string"
+version = "1.0.0"
+authors = [
+    "Hydroper <HydroperFox@gmail.com>",
+]
+description = "String types to work directly with UTF-16 encoded strings"
+keywords = ["utf16", "string"]
+categories = ["encoding", "text-processing"]
+repository = "https://github.com/realhydroper/rustutf16string"
+edition = "2024"
+license = "Apache-2.0"
+
+[dependencies]
+unicode-bom = "2"
