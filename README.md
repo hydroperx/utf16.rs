@@ -60,7 +60,7 @@ use realhydroper_utf16::{Utf16String, utils::*};
 fn utf8_loc_to_utf16_range(loc: &Utf8Location) -> Utf16Range {
     let src = loc.source();
     let first_line = loc.first_line_number();
-    let last_line = loc.first_line_number();
+    let last_line = loc.last_line_number();
 
     let start_line_offset = src.get_line_offset(first_line).unwrap();
     let end_line_offset: usize = src.get_line_offset(last_line).unwrap();
