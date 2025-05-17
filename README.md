@@ -1,17 +1,17 @@
-# UTF-16
+# hydroperx::utf16
 
 Work with UTF-16 in Rust.
 
 ## Differences to other crates
 
-- `utf16string` - `realhydroper-utf16` uses code units as `u16` instead of octets for indexing strings, as opposed to `utf16string`.
+- `utf16string` - `hydroperx-utf16` uses code units as `u16` instead of octets for indexing strings, as opposed to `utf16string`.
 
 ## Converting offsets between UTF-8 and UTF-16
 
 Use the `utils` submodule for converting between offset encodings:
 
 ```rust
-use realhydroper_utf16::{Utf16String, utils::*};
+use hydroperx_utf16::{Utf16String, utils::*};
 
 let utf8string = "a\u{10FFFF}b\u{10000}";
 let utf16string = Utf16String::from(utf8string);
@@ -28,7 +28,7 @@ The above is inefficient for large strings. If you have line slices, do somethin
 > Note: adjust the line numbers correctly depending on whether they are "zero" based or "one" based.
 
 ```rust
-use realhydroper_utf16::{Utf16String, utils::*};
+use hydroperx_utf16::{Utf16String, utils::*};
 
 fn utf16_range_to_utf8_offsets(src: &Utf8SourceText, range: Utf16Range) -> (usize, usize) {
     let start_line_offset = src.get_line_offset((range.start.line as usize) + 1).unwrap();
@@ -55,7 +55,7 @@ Do something like the following to convert from UTF-8 to UTF-16:
 > Note: adjust the line numbers correctly depending on whether they are "zero" based or "one" based.
 
 ```rust
-use realhydroper_utf16::{Utf16String, utils::*};
+use hydroperx_utf16::{Utf16String, utils::*};
 
 fn utf8_loc_to_utf16_range(loc: &Utf8Location) -> Utf16Range {
     let src = loc.source();
